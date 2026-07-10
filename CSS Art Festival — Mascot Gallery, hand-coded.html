@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)file:///C:/Users/sriva/Downloads/index_1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Art Festival — Mascot Gallery, hand-coded</title>
+<style>
+  :root{
+    --ink:#201406;
+    --cream:#FFF7E6;
+    --card:#FFFFFF;
+    --sky-top:#FFE9A8;
+    --sky-bottom:#FFC94A;
+  }
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    background:
+      radial-gradient(circle at 20% 10%, #FFF3D2 0%, transparent 45%),
+      radial-gradient(circle at 85% 85%, #FFE3B0 0%, transparent 40%),
+      var(--cream);
+    font-family:'Trebuchet MS','Segoe UI',sans-serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:48px 20px 80px;
+  }
+
+  h1{
+    font-family:Georgia,'Times New Roman',serif;
+    font-weight:900;
+    font-size:clamp(2.2rem,5vw,3.4rem);
+    margin:0 0 4px;
+    color:var(--ink);
+    text-align:center;
+  }
+  .sub{
+    color:#6b5a3f;
+    font-size:1rem;
+    margin-bottom:44px;
+    text-align:center;
+    max-width:560px;
+    line-height:1.5;
+  }
+
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(260px,320px));
+    gap:36px;
+    width:100%;
+    max-width:760px;
+    justify-content:center;
+  }
+  @media (max-width:640px){
+    .gallery{ grid-template-columns:1fr; justify-items:center; }
+  }
+
+  .card{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .card h2{
+    font-size:1.05rem;
+    color:var(--ink);
+    margin:16px 0 2px;
+  }
+  .card p{
+    font-size:.8rem;
+    color:#8a7757;
+    margin:0;
+    text-align:center;
+  }
+
+  .stage{
+    position:relative;
+    width:100%;
+    aspect-ratio:1/1;
+    border-radius:22px;
+    background:linear-gradient(180deg,var(--sky-top),var(--sky-bottom));
+    border:5px solid var(--ink);
+    box-shadow:7px 7px 0 var(--ink);
+    overflow:hidden;
+  }
+  .ground{
+    position:absolute;
+    bottom:0; left:0; right:0;
+    height:20%;
+    background:linear-gradient(180deg,#C9A24A,#A47C2E);
+    border-top:4px solid var(--ink);
+  }
+  .cloud{
+    position:absolute;
+    background:#FFFDF5;
+    border-radius:50%;
+    opacity:.75;
+  }
+  .cloud::before{
+    content:'';
+    position:absolute;
+    background:inherit;
+    border-radius:50%;
+  }
+  .cloud1{ width:15%; height:8%; top:12%; left:10%; }
+  .cloud1::before{ width:9%; height:32%; top:-70%; left:20%; }
+  .cloud2{ width:12%; height:6%; top:22%; right:12%; opacity:.6; }
+  .cloud2::before{ width:7%; height:28%; top:-70%; left:20%; }
+
+  footer{
+    margin-top:50px;
+    font-size:.75rem;
+    color:#8a7757;
+    text-align:center;
+  }
+
+  /* =========================================================
+     PIKACHU
+  ========================================================= */
+  .pika{
+    position:absolute; left:50%; top:52%;
+    width:62%; height:62%;
+    transform:translate(-50%,-50%);
+  }
+  .pika .shadow{
+    position:absolute; left:50%; bottom:-14%;
+    width:62%; height:8%;
+    background:rgba(0,0,0,.22);
+    border-radius:50%;
+    transform:translateX(-50%);
+  }
+  .pika .ear{
+    position:absolute; width:17%; height:44%;
+    background:#FFD23F; border:4px solid var(--ink);
+    border-radius:50% 50% 8px 8px/60% 60% 8px 8px;
+    top:-26%; z-index:1;
+  }
+  .pika .ear-l{ left:6%; transform:rotate(-18deg); }
+  .pika .ear-r{ right:6%; transform:rotate(18deg) scaleX(-1); }
+  .pika .ear::after{
+    content:''; position:absolute; top:-2px; left:50%;
+    width:52%; height:44%;
+    background:#3C2414;
+    border-radius:50% 50% 8px 8px/60% 60% 8px 8px;
+    transform:translateX(-50%);
+  }
+  .pika .body{
+    position:absolute; left:0; top:0; width:100%; height:92%;
+    background:#FFD23F; border:4px solid var(--ink);
+    border-radius:50% 50% 46% 46%/55% 55% 45% 45%;
+    z-index:2;
+    box-shadow:inset -14px -18px 0 -4px #F2B705;
+  }
+  .pika .cheek{
+    position:absolute; top:50%; width:13%; height:10%;
+    background:#E8483A; border-radius:50%; z-index:4;
+    box-shadow:inset -3px -3px 0 -1px #C7301F;
+  }
+  .pika .cheek-l{ left:8%; }
+  .pika .cheek-r{ right:8%; }
+  .pika .eye{
+    position:absolute; top:36%; width:9%; height:11%;
+    background:var(--ink); border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+    z-index:4;
+  }
+  .pika .eye-l{ left:27%; }
+  .pika .eye-r{ right:27%; }
+  .pika .eye::after{
+    content:''; position:absolute; top:15%; left:15%;
+    width:35%; height:35%; background:#fff; border-radius:50%;
+  }
+  .pika .mouth{
+    position:absolute; top:55%; left:50%;
+    width:13%; height:7%;
+    border:3px solid var(--ink); border-top:none; border-left:none;
+    border-radius:0 0 60% 20%;
+    transform:translateX(-3px) rotate(6deg);
+    z-index:4;
+  }
+  .pika .stripe{
+    position:absolute; top:3%; width:8%; height:5%;
+    background:#3C2414; border-radius:50%; z-index:3;
+  }
+  .pika .stripe-l{ left:18%; transform:rotate(-8deg); }
+  .pika .stripe-r{ right:18%; transform:rotate(8deg); }
+  .pika .arm{
+    position:absolute; top:64%; width:13%; height:18%;
+    background:#FFD23F; border:4px solid var(--ink);
+    border-radius:40% 40% 50% 50%; z-index:1;
+  }
+  .pika .arm-l{ left:-5%; transform:rotate(18deg); }
+  .pika .arm-r{ right:-5%; transform:rotate(-18deg); }
+  .pika .foot{
+    position:absolute; bottom:-7%; width:21%; height:12%;
+    background:#FFD23F; border:4px solid var(--ink);
+    border-radius:50% 50% 40% 40%; z-index:0;
+  }
+  .pika .foot-l{ left:12%; }
+  .pika .foot-r{ right:12%; }
+  .pika .tail{
+    position:absolute; top:15%; right:-42%;
+    width:50%; height:65%;
+    background:#FFD23F; border:4px solid var(--ink);
+    clip-path:polygon(38% 0%,62% 0%,46% 34%,78% 30%,30% 100%,46% 52%,14% 58%);
+    z-index:0;
+    box-shadow:inset -8px 5px 0 -3px #F2B705;
+  }
+
+  /* =========================================================
+     MARIO
+  ========================================================= */
+  .mario{
+    position:absolute; left:50%; top:54%;
+    width:56%; height:70%;
+    transform:translate(-50%,-50%);
+  }
+  .mario .shadow{
+    position:absolute; left:50%; bottom:-8%;
+    width:60%; height:7%;
+    background:rgba(0,0,0,.22); border-radius:50%;
+    transform:translateX(-50%);
+  }
+  .mario .cap{
+    position:absolute; top:0; left:50%;
+    width:78%; height:26%;
+    background:#E52521; border:4px solid var(--ink);
+    border-radius:50% 50% 0 0;
+    transform:translateX(-50%);
+    z-index:5;
+  }
+  .mario .brim{
+    position:absolute; top:20%; left:50%;
+    width:56%; height:14%;
+    background:#E52521; border:4px solid var(--ink);
+    border-radius:0 0 60% 20%;
+    transform:translateX(-38%);
+    z-index:6;
+  }
+  .mario .badge{
+    position:absolute; top:6%; left:50%;
+    width:22%; height:22%;
+    background:#FFF7E6; border:3px solid var(--ink);
+    border-radius:50%;
+    transform:translateX(-50%);
+    display:flex; align-items:center; justify-content:center;
+    font-family:Georgia,serif; font-weight:900; font-size:11px;
+    color:#E52521;
+    z-index:7;
+  }
+  .mario .face{
+    position:absolute; top:16%; left:50%;
+    width:62%; height:28%;
+    background:#F3B48C; border:4px solid var(--ink);
+    border-radius:44% 44% 60% 60%/50% 50% 60% 60%;
+    transform:translateX(-50%);
+    z-index:4;
+  }
+  .mario .eye{
+    position:absolute; top:44%; width:9%; height:11%;
+    background:var(--ink); border-radius:50%; z-index:6;
+  }
+  .mario .eye-l{ left:20%; }
+  .mario .eye-r{ right:22%; }
+  .mario .nose{
+    position:absolute; top:52%; left:50%;
+    width:22%; height:20%;
+    background:#F3B48C; border:4px solid var(--ink);
+    border-radius:50%;
+    transform:translateX(-50%);
+    z-index:5;
+  }
+  .mario .mustache{
+    position:absolute; top:68%; left:50%;
+    width:52%; height:16%;
+    background:#5A3312; border:3px solid var(--ink);
+    border-radius:0 0 50% 50%/0 0 100% 100%;
+    transform:translateX(-50%);
+    z-index:6;
+  }
+  .mario .torso{
+    position:absolute; top:40%; left:50%;
+    width:64%; height:34%;
+    background:#0B57C6; border:4px solid var(--ink);
+    border-radius:24% 24% 30% 30%;
+    transform:translateX(-50%);
+    z-index:3;
+  }
+  .mario .button{
+    position:absolute; top:8%; width:11%; height:11%;
+    background:#FFD23F; border:2px solid var(--ink); border-radius:50%;
+    z-index:4;
+  }
+  .mario .button-l{ left:22%; }
+  .mario .button-r{ right:22%; }
+  .mario .sleeve{
+    position:absolute; top:40%; width:20%; height:22%;
+    background:#E52521; border:4px solid var(--ink);
+    border-radius:50%;
+    z-index:2;
+  }
+  .mario .sleeve-l{ left:-4%; }
+  .mario .sleeve-r{ right:-4%; }
+  .mario .glove{
+    position:absolute; top:56%; width:16%; height:16%;
+    background:#FFF7E6; border:3px solid var(--ink);
+    border-radius:50%;
+    z-index:3;
+  }
+  .mario .glove-l{ left:-6%; }
+  .mario .glove-r{ right:-6%; }
+  .mario .leg{
+    position:absolute; bottom:-2%; width:20%; height:18%;
+    background:#0B57C6; border:4px solid var(--ink);
+    border-radius:20% 20% 10% 10%;
+    z-index:1;
+  }
+  .mario .leg-l{ left:20%; }
+  .mario .leg-r{ right:20%; }
+  .mario .shoe{
+    position:absolute; bottom:-10%; width:24%; height:12%;
+    background:#5A3312; border:4px solid var(--ink);
+    border-radius:40% 40% 50% 50%;
+    z-index:1;
+  }
+  .mario .shoe-l{ left:14%; }
+  .mario .shoe-r{ right:14%; }
+
+  /* =========================================================
+     OCTOCAT
+  ========================================================= */
+  .octo{
+    position:absolute; left:50%; top:52%;
+    width:60%; height:60%;
+    transform:translate(-50%,-50%);
+  }
+  .octo .shadow{
+    position:absolute; left:50%; bottom:-12%;
+    width:62%; height:8%;
+    background:rgba(0,0,0,.22); border-radius:50%;
+    transform:translateX(-50%);
+  }
+  .octo .tent{
+    position:absolute; bottom:6%;
+    width:14%; height:40%;
+    background:#1B1F23; border:3px solid var(--ink);
+    border-radius:40% 40% 60% 60%;
+    z-index:0;
+  }
+  .octo .tent1{ left:-2%; transform:rotate(18deg); }
+  .octo .tent2{ left:16%; transform:rotate(6deg); height:34%; bottom:2%; }
+  .octo .tent3{ right:16%; transform:rotate(-6deg); height:34%; bottom:2%; }
+  .octo .tent4{ right:-2%; transform:rotate(-18deg); }
+  .octo .ear{
+    position:absolute; top:-8%; width:20%; height:26%;
+    background:#1B1F23; border:4px solid var(--ink);
+    clip-path:polygon(50% 0%,100% 100%,0% 100%);
+    z-index:1;
+  }
+  .octo .ear-l{ left:6%; transform:rotate(-8deg); }
+  .octo .ear-r{ right:6%; transform:rotate(8deg); }
+  .octo .head{
+    position:absolute; top:0; left:50%;
+    width:80%; height:66%;
+    background:#1B1F23; border:4px solid var(--ink);
+    border-radius:50% 50% 44% 44%;
+    transform:translateX(-50%);
+    z-index:2;
+  }
+  .octo .cheek{
+    position:absolute; top:40%; width:24%; height:26%;
+    background:#F2F2F2; border-radius:50%;
+    z-index:3;
+  }
+  .octo .cheek-l{ left:2%; }
+  .octo .cheek-r{ right:2%; }
+  .octo .eye{
+    position:absolute; top:30%; width:16%; height:18%;
+    background:#fff; border:3px solid var(--ink); border-radius:50%;
+    z-index:4;
+  }
+  .octo .eye-l{ left:20%; }
+  .octo .eye-r{ right:20%; }
+  .octo .pupil{
+    position:absolute; top:28%; left:28%;
+    width:44%; height:44%;
+    background:var(--ink); border-radius:50%;
+  }
+  .octo .nose{
+    position:absolute; top:52%; left:50%;
+    width:10%; height:8%;
+    background:#E24329; border-radius:50%;
+    transform:translateX(-50%);
+    z-index:4;
+  }
+  .octo .whisker{
+    position:absolute; top:58%;
+    width:20%; height:2px;
+    background:var(--ink); z-index:4;
+  }
+  .octo .whisker-l{ left:-14%; }
+  .octo .whisker-r{ right:-14%; }
+
+  /* =========================================================
+     AMONG-US CREWMATE
+  ========================================================= */
+  .crew{
+    position:absolute; left:50%; top:54%;
+    width:46%; height:68%;
+    transform:translate(-50%,-50%);
+  }
+  .crew .shadow{
+    position:absolute; left:50%; bottom:-8%;
+    width:70%; height:8%;
+    background:rgba(0,0,0,.22); border-radius:50%;
+    transform:translateX(-50%);
+  }
+  .crew .backpack{
+    position:absolute; top:26%; left:-14%;
+    width:26%; height:42%;
+    background:#8C1D1D; border:4px solid var(--ink);
+    border-radius:30% 50% 50% 30%;
+    z-index:0;
+  }
+  .crew .body{
+    position:absolute; top:0; left:50%;
+    width:78%; height:82%;
+    background:#C21F3A; border:5px solid var(--ink);
+    border-radius:48% 48% 40% 40%/54% 54% 40% 40%;
+    transform:translateX(-50%);
+    z-index:2;
+    box-shadow:inset -14px -14px 0 -6px #8C1330;
+  }
+  .crew .visor{
+    position:absolute; top:14%; left:52%;
+    width:64%; height:32%;
+    background:#BEEFF5; border:4px solid var(--ink);
+    border-radius:50% 60% 60% 50%/60% 70% 70% 60%;
+    transform:translateX(-42%);
+    z-index:4;
+    box-shadow:inset 6px -4px 0 -2px #7FCFE0;
+  }
+  .crew .visor::after{
+    content:'';
+    position:absolute; top:16%; left:16%;
+    width:34%; height:26%;
+    background:rgba(255,255,255,.75);
+    border-radius:50%;
+  }
+  .crew .leg{
+    position:absolute; bottom:-4%; width:26%; height:20%;
+    background:#C21F3A; border:5px solid var(--ink);
+    border-radius:0 0 40% 40%;
+    z-index:1;
+  }
+  .crew .leg-l{ left:16%; }
+  .crew .leg-r{ right:16%; }
+</style>
+</head>
+<body>
+
+  <h1>CSS Art Festival</h1>
+  <p class="sub">Famous mascots, built entirely from &lt;div&gt; and &lt;span&gt; elements — shaped with border-radius, box-shadow, transform and absolute positioning. No images, no SVG, no background-image, fully hand-coded.</p>
+
+  <div class="gallery">
+
+    <!-- PIKACHU -->
+    <div class="card">
+      <div class="stage">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="ground"></div>
+        <div class="pika">
+          <div class="shadow"></div>
+          <div class="tail"></div>
+          <div class="foot foot-l"></div>
+          <div class="foot foot-r"></div>
+          <div class="arm arm-l"></div>
+          <div class="arm arm-r"></div>
+          <div class="ear ear-l"></div>
+          <div class="ear ear-r"></div>
+          <div class="body"></div>
+          <div class="stripe stripe-l"></div>
+          <div class="stripe stripe-r"></div>
+          <div class="cheek cheek-l"></div>
+          <div class="cheek cheek-r"></div>
+          <div class="eye eye-l"></div>
+          <div class="eye eye-r"></div>
+          <div class="mouth"></div>
+        </div>
+      </div>
+      <h2>Pikachu</h2>
+      <p>Pokémon mascot</p>
+    </div>
+
+    <!-- MARIO -->
+    <div class="card">
+      <div class="stage">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="ground"></div>
+        <div class="mario">
+          <div class="shadow"></div>
+          <div class="sleeve sleeve-l"></div>
+          <div class="sleeve sleeve-r"></div>
+          <div class="leg leg-l"></div>
+          <div class="leg leg-r"></div>
+          <div class="shoe shoe-l"></div>
+          <div class="shoe shoe-r"></div>
+          <div class="torso"></div>
+          <div class="button button-l"></div>
+          <div class="button button-r"></div>
+          <div class="glove glove-l"></div>
+          <div class="glove glove-r"></div>
+          <div class="face"></div>
+          <div class="mustache"></div>
+          <div class="nose"></div>
+          <div class="eye eye-l"></div>
+          <div class="eye eye-r"></div>
+          <div class="cap"></div>
+          <div class="brim"></div>
+          <div class="badge">M</div>
+        </div>
+      </div>
+      <h2>Mario</h2>
+      <p>Nintendo mascot</p>
+    </div>
+
+    <!-- OCTOCAT -->
+    <div class="card">
+      <div class="stage">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="ground"></div>
+        <div class="octo">
+          <div class="shadow"></div>
+          <div class="tent tent1"></div>
+          <div class="tent tent2"></div>
+          <div class="tent tent3"></div>
+          <div class="tent tent4"></div>
+          <div class="ear ear-l"></div>
+          <div class="ear ear-r"></div>
+          <div class="head"></div>
+          <div class="cheek cheek-l"></div>
+          <div class="cheek cheek-r"></div>
+          <div class="eye eye-l"><div class="pupil"></div></div>
+          <div class="eye eye-r"><div class="pupil"></div></div>
+          <div class="nose"></div>
+          <span class="whisker whisker-l"></span>
+          <span class="whisker whisker-r"></span>
+        </div>
+      </div>
+      <h2>Octocat</h2>
+      <p>GitHub mascot</p>
+    </div>
+
+    <!-- AMONG US CREWMATE -->
+    <div class="card">
+      <div class="stage">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="ground"></div>
+        <div class="crew">
+          <div class="shadow"></div>
+          <div class="backpack"></div>
+          <div class="leg leg-l"></div>
+          <div class="leg leg-r"></div>
+          <div class="body"></div>
+          <div class="visor"></div>
+        </div>
+      </div>
+      <h2>Crewmate</h2>
+      <p>Among Us mascot</p>
+    </div>
+
+  </div>
+
+  <footer>CSS Art Festival · Hand-coded ·  deployed pages ALl rights resevered for @srivastava </footer>
+
+
+
+</body></html>
